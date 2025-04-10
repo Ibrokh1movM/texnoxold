@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Profile - Online Shop{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-lg mt-5">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Your Profile</h2>
+                        <p><strong>Username:</strong> {{ user.username }}</p>
+                        <p><strong>Email:</strong> {{ user.email }}</p>
+                        <p><strong>Phone:</strong> {{ user.phone_number|default:"Not set" }}</p>
+                        <p><strong>Address:</strong> {{ user.address|default:"Not set" }}</p>
+                        <a href="{% url 'logout' %}" class="btn btn-danger w-100 mt-3">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

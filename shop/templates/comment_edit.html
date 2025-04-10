@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Edit Comment - Online Shop{% endblock %}
+{% block content %}
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Edit Comment</h1>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} alert-dismissible fade show"
+                     role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="card shadow-sm p-4">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="product" class="form-label">Product</label>
+                    <select name="product" id="product" class="form-control" required>
+                        {% for product in products %}
+                            <option value="{{ product.id }}"
+                                    {% if product.id == comment.product.id %}selected{% endif %}>
+                                {{ product.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content</label>
+                    <textarea name="content" id="content" class="form-control" rows="3"
+                              required>{{ comment.content }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Update Comment</button>
+            </form>
+            <a href="{% url 'comment_manage' %}" class="btn btn-secondary w-100 mt-2">Cancel</a>
+        </div>
+    </div>
+{% endblock %}

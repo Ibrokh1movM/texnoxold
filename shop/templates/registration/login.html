@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Login - Online Shop{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-lg mt-5">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Login</h2>
+                        <!-- Username/Parol formasi -->
+                        <form method="post" class="mb-3">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    Invalid username or password.
+                                </div>
+                            {% endif %}
+                            <div class="mb-3">
+                                <label for="id_username" class="form-label">Username</label>
+                                <input type="text" name="username" id="id_username" class="form-control"
+                                       placeholder="Enter username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_password" class="form-label">Password</label>
+                                <input type="password" name="password" id="id_password" class="form-control"
+                                       placeholder="Enter password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </form>
+                        <!-- Google orqali kirish -->
+                        <div class="text-center">
+                            <p class="text-muted">Or login with</p>
+                            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-outline-dark w-100">
+                                <i class="fab fa-google me-2"></i> Login with Google
+                            </a>
+                        </div>
+                        <!-- Register havolasi -->
+                        <p class="text-center mt-3">
+                            Don't have an account? <a href="{% url 'register' %}">Register here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
